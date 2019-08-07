@@ -4,7 +4,7 @@ namespace MusicSite\Controllers;
 
 use Http\Request;
 use Http\Response;
-use MusicSite\Template\Renderer;
+use MusicSite\Template\FrontendRenderer;
 
 class Homepage 
 {
@@ -15,7 +15,7 @@ class Homepage
 	public function __construct(
 		Request  $request, 
 		Response $response,
-		Renderer $renderer)
+		FrontendRenderer $renderer)
 	{
 		$this->request  = $request;
 		$this->response = $response;
@@ -25,8 +25,7 @@ class Homepage
 	public function show() 
 	{
 		$data = [
-			'name' => $this->request->getParameter('name', 'stranger')
-		];
+			'name' => $this->request->getParameter('name', 'stranger')];
 		$html = $this->renderer->render('Homepage', $data);
 		$this->response->setContent($html);
 	}

@@ -23,7 +23,16 @@ $injector->define('Mustache_Engine', [
 		])
 	]
 ]);
-$injector->alias('MusicSite\Template\Renderer', 'MusicSite\Template\MustacheRenderer');
+
+$injector->delegate('\Twig\Environment', function() use ($injector) {
+	$loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/templates' );
+	$twig = new \Twig\Environment($loader);
+	return $twig;
+});
+
+$injector->alias('MusicSite\Template\Renderer', 'MusicSite\Template\TwigRenderer');
+$injector->alias('MusicSite\Template\FrontendRenderer', 'MusicSite\Template\FrontendTwigRenderer');
+
 
 // Implement page reader
 $injector->define('MusicSite\Page\FilePageReader', [
@@ -32,5 +41,8 @@ $injector->define('MusicSite\Page\FilePageReader', [
 
 $injector->alias('MusicSite\Page\PageReader', 'MusicSite\Page\FilePageReader');
 $injector->share('MusicSite\Page\FilePageReader');
+
+$injector->alias('MusicSite\Menu\MenuReader', 'MusicSite\Menu\ArrayMenuReader');
+$injector->share('MusicSite\Menu\ArrayMenuReader');
 
 return $injector;

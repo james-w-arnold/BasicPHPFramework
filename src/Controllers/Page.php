@@ -3,7 +3,7 @@
 namespace MusicSite\Controllers;
 
 use Http\Response;
-use MusicSite\Template\Renderer;
+use MusicSite\Template\FrontendRenderer;
 use MusicSite\Page\PageReader;
 
 use MusicSite\Page\InvalidPageException;
@@ -15,9 +15,9 @@ class Page
 	private $pageReader;
 
 	public function __construct( 
-		Response   $response,
-		Renderer   $renderer,
-		PageReader $pageReader 
+		Response         $response,
+		FrontendRenderer $renderer,
+		PageReader       $pageReader
 	) {
 		$this->response   = $response;
 		$this->renderer   = $renderer;

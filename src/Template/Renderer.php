@@ -4,5 +4,5 @@ namespace MusicSite\Template;
 
 interface Renderer 
 {
-	public function render($render, $data = []) : string;
+	public function render($template, $data = []) : string;
 }
